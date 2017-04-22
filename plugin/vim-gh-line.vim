@@ -52,6 +52,7 @@ func! s:gh_line() range
     " Strip Newlines
     let origin = <SID>StripNL(origin)
     let branch = <SID>StripNL(branch)
+    let branch = <SID>StripHEAD(branch)
     let gitRoot = <SID>StripNL(gitRoot)
     let fullPath = <SID>StripNL(fullPath)
 
@@ -66,6 +67,10 @@ endfun
 
 func! s:StripNL(l)
   return substitute(a:l, '\n$', '', '')
+endfun
+
+func! s:StripHEAD(l)
+  return substitute(a:l, 'heads/', '', '')
 endfun
 
 noremap <silent> <Plug>(gh-line) :call <SID>gh_line()<CR>
